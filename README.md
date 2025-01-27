@@ -11,3 +11,8 @@ Most stuff is configurable via the two layout settings in the filesystem (layout
 Though some values might have no effect because the logic for them is not implemented.
 
 This software is provided as is and does not represent good practice for Godot development.
+
+# Controls
+Left (ui_left) / Right (ui_right) arrow to scroll
+Enter (ui_accept) to select
+Esc (ui_cancel) to deselect
