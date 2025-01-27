@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://db04nwkeaenjx"]
+
+[ext_resource type="Script" uid="uid://djdbc6g2c5we3" path="res://wiiflow.gd" id="1_uu2t6"]
+[ext_resource type="Script" uid="uid://b5ckrvkcquest" path="res://cam.gd" id="2_1ldp1"]
+[ext_resource type="Resource" uid="uid://b341mg6gsbmj8" path="res://layout_settings_normal.tres" id="2_e1032"]
+[ext_resource type="Resource" uid="uid://dsl3ghe2bh2ll" path="res://layout_settings_selected.tres" id="3_b27yh"]
+
+[sub_resource type="Environment" id="Environment_e1032"]
+background_mode = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e1032"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 0.8)
+
+[sub_resource type="QuadMesh" id="QuadMesh_e1032"]
+material = SubResource("StandardMaterial3D_e1032")
+size = Vector2(100, 100)
+orientation = 1
+
+[node name="Wiiflow" type="Node3D"]
+script = ExtResource("1_uu2t6")
+games = Array[StringName]([&"GSAP01", &"D43P01", &"GP6P01", &"GAFP01", &"GMSP01", &"GM4P01", &"GTSP4F", &"GZ2P01", &"GLMP01", &"GZLP01", &"GSWP64", &"GALP01", &"GEDP01", &"GPIP01", &"G8MP01", &"GKBPAF", &"GRNP52", &"GR2P52"])
+layout_settings_normal = ExtResource("2_e1032")
+layout_settings_selected = ExtResource("3_b27yh")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 5)
+environment = SubResource("Environment_e1032")
+current = true
+fov = 45.0
+script = ExtResource("2_1ldp1")
+
+[node name="Covers" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+mesh = SubResource("QuadMesh_e1032")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 4
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+use_threads = true
+
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]

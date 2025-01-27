@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://wogupsewnu6k"]
+
+[ext_resource type="Script" uid="uid://be0bc35qkxxq4" path="res://cover.gd" id="1_j3ve8"]
+
+[node name="Cover" type="Node3D"]
+script = ExtResource("1_j3ve8")
+
+[node name="Normal" type="MeshInstance3D" parent="."]
+
+[node name="Mirror" type="MeshInstance3D" parent="."]
